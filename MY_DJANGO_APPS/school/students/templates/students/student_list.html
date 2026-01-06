@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student List</title>
+</head>
+<body>
+    <h1>Student Management System</h1>
+    <p><a href="{% url 'student_create' %}">Add New Student</a></p>
+
+    {% if object_list %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>DOB</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in object_list %}
+                <tr>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.student_id }}</td>
+                    <td>{{ student.email }}</td>
+                    <td>{{ student.date_of_birth }}</td>
+                    <td>
+                        <a href="{% url 'student_update' student.pk %}">Edit</a> |
+                        <a href="{% url 'student_delete' student.pk %}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No students found. Add one now!</p>
+    {% endif %}
+</body>
+</html>
